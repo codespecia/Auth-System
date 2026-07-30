@@ -43,19 +43,11 @@ export const signup = async (req, res) => {
     // Hashing Passowrd
     const hashedPassword = await bcryptjs.hash(password, 10);
 
-    // Create 6 Digit Verification Token
-    const verificationToken = Math.floor(100000 + Math.random() * 900000);
-
-    // Create Verification Expiry Time
-    const verificationTokenExpiresAt = Date.now() + 24 * 60 * 60 * 1000;
-
     // Store & Saving User Data
     const user = new User({
       name,
       email,
       password: hashedPassword,
-      verificationToken: verificationToken,
-      verificationTokenExpiresAt: verificationTokenExpiresAt,
     });
     await user.save();
 
@@ -70,7 +62,6 @@ export const signup = async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        isverified: user.isVerified,
         lastLogin: user.lastLogin,
       },
     });
@@ -130,7 +121,6 @@ export const login = async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        isverified: user.isVerified,
         lastLogin: user.lastLogin,
       },
     });
