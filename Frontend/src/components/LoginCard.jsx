@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const LoginCard = () => {
-  return (
-    <div>LoginCard</div>
-  )
-}
+  return <div className="text-red-500">LoginCard</div>;
+};
 
-export default LoginCard
+export default LoginCard;
